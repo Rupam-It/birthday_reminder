@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Birthday Reminder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li:before {
+    content: "\2022";
+    color: #1abc9c;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+}
+
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.dark-mode th {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode td {
+    color: #fff;
+}
+
+/* Your existing CSS */
+
+.dark-mode .container {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode h1, .dark-mode h2 {
+    color: #fff;
+}
+
+.dark-mode ul, .dark-mode li {
+    color: #fff;
+}
+
+.dark-mode li:before {
+    content: "\2022";
+    color: #1abc9c;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+table tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+
+h1,h2,p{
+    text-align: center;
+}
+/* Rest of your CSS */
+
+   
+
+    </style>
+    
+</head>
+
+<body>
+    <div class="text-right mb-3">
+        <button class="btn btn-dark" id="darkModeToggle"></button>
+    </div>
+    
+
+    
+    <div class="container mt-5">
+        <h1 class="display-4">Birthday Reminder</h1>
+        <p class="lead">Never miss a birthday again!
+        <i class="fas fa-birthday-cake fa-2x"></i>
+        </p>
+        <h2>Today's Birthdays</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Birthdate</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% todayBirthdays.forEach(birthday => { %>
+            <tr>
+                <td><%= birthday.name %></td>
+                <td><%= birthday.date.getDate() %> <%= months[birthday.date.getMonth()] %></td>
+                <td><a class="btn btn-success" href="/edit?id=<%=birthday.id%>" role="button">Edit</a></td>
+                <td><a class="btn btn-danger" href="/delete?id=<%=birthday.id%>" role="button">Delete</a></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<h2>Upcoming Birthdays</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Birthdate</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% upcomingBirthdays.forEach(birthday => { %>
+            <tr>
+                <td><%= birthday.name %></td>
+                <td><%= birthday.date.getDate() %> <%= months[birthday.date.getMonth()] %></td>
+                <td><a class="btn btn-success" href="/edit?id=<%=birthday.id%>" role="button">Edit</a></td>
+                <td><a class="btn btn-danger" href="/delete?id=<%=birthday.id%>" role="button">Delete</a></td>
+             </tr>
+        <% }); %>
+    </tbody>
+</table>
+<center>
+
+    <a class="btn btn-primary btn-lg" href="/add" role="button">Add new</a>
+</center>
+            
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#darkModeToggle').click(function() {
+                $('body').toggleClass('dark-mode');
+                const isDarkMode = $('body').hasClass('dark-mode');
+                const icon = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                $('#darkModeToggle').html(icon);
+            });
+        });
+    </script>
+    
+    
+</body>
+
+</html>
